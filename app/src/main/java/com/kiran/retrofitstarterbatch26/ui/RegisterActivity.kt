@@ -37,6 +37,7 @@ class RegisterActivity : AppCompatActivity() {
                 etPassword.requestFocus()
                 return@setOnClickListener
             } else {
+
             }
         }
     }
