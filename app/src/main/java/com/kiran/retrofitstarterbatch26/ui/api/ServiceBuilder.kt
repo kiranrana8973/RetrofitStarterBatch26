@@ -16,8 +16,10 @@ object ServiceBuilder {
         .client(OkHttpClient.Builder().build())
         .build()
 
-
-
+    //Generic function
+    fun <T> buildService(serviceType: Class<T>): T {
+        return retrofitBuilder.create(serviceType)
+    }
 
 
 }

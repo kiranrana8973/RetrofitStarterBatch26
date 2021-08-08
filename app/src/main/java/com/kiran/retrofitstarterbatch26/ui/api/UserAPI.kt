@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface UserAPI {
-
+// user api
     @POST("auth/register")
     suspend fun registerUser(
         @Body user : User
@@ -17,5 +17,7 @@ interface UserAPI {
     suspend fun login(
         @Body user : User
     ) : Response<UserResponse>
+
+
 
 }
