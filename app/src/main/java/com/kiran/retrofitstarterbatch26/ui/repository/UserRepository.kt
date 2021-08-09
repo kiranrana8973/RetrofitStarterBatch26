@@ -11,9 +11,18 @@ class UserRepository : MyApiRequest() {
     private val userApi =
         ServiceBuilder.buildService(UserAPI::class.java)
 
-    suspend fun registerUser(user : User) : UserResponse{
+    //Register user
+    suspend fun registerUser(user: User): UserResponse {
         return apiRequest {
             userApi.registerUser(user)
         }
     }
+    // Login user
+    suspend fun login(username :String,password :String): UserResponse {
+        return apiRequest {
+            userApi.login(username,password)
+        }
+    }
+
+
 }

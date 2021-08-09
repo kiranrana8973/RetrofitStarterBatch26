@@ -7,12 +7,12 @@ import java.io.IOException
 
 abstract class MyApiRequest {
 
-    suspend fun<T> apiRequest(call :suspend() -> Response<T>) : T{
-            val response = call.invoke()
+    suspend fun <T> apiRequest(call: suspend () -> Response<T>): T {
+        val response = call.invoke()
 
-        if(response.isSuccessful){
+        if (response.isSuccessful) {
             return response.body()!!
-        }else {
+        } else {
 
             val error = response.errorBody()?.string()
             val message = StringBuilder()

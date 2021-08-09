@@ -62,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     } catch (ex: Exception) {
                         withContext(Main) {
-                            Toast.makeText(this@RegisterActivity, "Either usename or password", Toast.LENGTH_SHORT)
+                            Toast.makeText(this@RegisterActivity, ex.toString(), Toast.LENGTH_SHORT)
                                 .show()
                         }
                     }
