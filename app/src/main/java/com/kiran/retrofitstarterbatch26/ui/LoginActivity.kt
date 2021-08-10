@@ -9,6 +9,7 @@ import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.kiran.retrofitstarterbatch26.R
+import com.kiran.retrofitstarterbatch26.ui.api.ServiceBuilder
 import com.kiran.retrofitstarterbatch26.ui.model.User
 import com.kiran.retrofitstarterbatch26.ui.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
@@ -55,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 val repository = UserRepository()
                 val response = repository.login(username,password)
                 if (response.success== true) {
+                    ServiceBuilder.token ="Bearer ${response.token}"
                     startActivity(
                         Intent(
                             this@LoginActivity,
