@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:text="kiran"
             android:background="@color/white"
             android:hint="Username"
             android:textSize="15sp" />
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/white"
+            android:text="kiran123"
             android:hint="Password"
             android:inputType="textPassword"
             android:textSize="15sp" />
