@@ -17,10 +17,11 @@ class UserRepository : MyApiRequest() {
             userApi.registerUser(user)
         }
     }
+
     // Login user
-    suspend fun login(username :String,password :String): UserResponse {
+    suspend fun login(username: String, password: String): UserResponse {
         return apiRequest {
-            userApi.login(username,password)
+            userApi.login(username, password)
         }
     }
 

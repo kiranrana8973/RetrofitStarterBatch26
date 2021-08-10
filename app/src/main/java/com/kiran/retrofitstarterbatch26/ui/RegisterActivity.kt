@@ -47,7 +47,6 @@ class RegisterActivity : AppCompatActivity() {
                 etPassword.requestFocus()
                 return@setOnClickListener
             } else {
-
                 val user =
                     User(fname = fname, lname = lname, username = username, password = password)
 
