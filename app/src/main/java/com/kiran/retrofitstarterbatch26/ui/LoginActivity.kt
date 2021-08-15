@@ -1,11 +1,13 @@
 package com.kiran.retrofitstarterbatch26.ui
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.core.app.ActivityCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.kiran.retrofitstarterbatch26.R
@@ -38,6 +40,11 @@ class LoginActivity : AppCompatActivity() {
         linearLayout = findViewById(R.id.linearLayout)
         btnLogin = findViewById(R.id.btnLogin)
 
+        if (!permissionCheckGaraHai()) {
+            permissionMagaHai()
+        }
+
+
         tvRegister.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
@@ -47,6 +54,29 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private val permissions = arrayOf(
+        android.Manifest.permission.CAMERA,
+        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    )
+
+    private fun permissionCheckGaraHai(): Boolean {
+        var hasPermission = true
+        for (permission in permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) !=
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                hasPermission = false
+                break
+            }
+        }
+        return hasPermission
+    }
+
+    fun permissionMagaHai() {
+        ActivityCompat.requestPermissions(this@LoginActivity,
+            permissions, 1)
+    }
+
     private fun login() {
         val username = etUsername.text.toString()
         val password = etPassword.text.toString()
@@ -54,9 +84,12 @@ class LoginActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
-                val response = repository.login(username,password)
-                if (response.success== true) {
-                    ServiceBuilder.token ="Bearer ${response.token}"
+                val response = repository.login(username, password)
+                if (response.success == true) {
+                    // Save token
+                    ServiceBuilder.token = "Bearer ${response.token}"
+                    //Save username and password in shared preferences
+                   // saveUsernamePassword()
                     startActivity(
                         Intent(
                             this@LoginActivity,
@@ -91,4 +124,9 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun askRunTimerPermission() {
+
+    }
+
 }

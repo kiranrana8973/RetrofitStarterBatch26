@@ -1,10 +1,11 @@
 package com.kiran.retrofitstarterbatch26.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RadioButton
+import android.provider.MediaStore
+import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.textfield.TextInputEditText
 import com.kiran.retrofitstarterbatch26.R
 
@@ -41,10 +42,36 @@ class AddStudentActivity : AppCompatActivity() {
     }
 
     private fun loadPopUpMenu() {
-        TODO("Not yet implemented")
+        val popMenu = PopupMenu(this@AddStudentActivity, imgProfile)
+        popMenu.menuInflater.inflate(R.menu.gallery_camera, popMenu.menu)
+        popMenu.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.menuCamera) {
+               openCamera()
+            } else if (item.itemId == R.id.menuGallery) {
+               openGallery()
+            }
+            true
+        }
+        popMenu.show()
+
+    }
+
+    private val CAMERA_CODE = 1
+    private val GALLERY_CODE = 0
+
+    private fun openGallery() {
+        val galleryOpenGaraHai = Intent(Intent.ACTION_PICK)
+        galleryOpenGaraHai.type = "image/*"
+        startActivityForResult(galleryOpenGaraHai,GALLERY_CODE)
+    }
+
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent,CAMERA_CODE)
+
     }
 
     private fun saveStudent() {
-        TODO("Not yet implemented")
+
     }
 }
