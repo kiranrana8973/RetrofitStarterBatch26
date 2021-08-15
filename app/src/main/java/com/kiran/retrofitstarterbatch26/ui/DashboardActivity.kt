@@ -20,6 +20,8 @@ class DashboardActivity : AppCompatActivity() {
         btnViewStudent.setOnClickListener {
             startActivity(Intent(this@DashboardActivity,ViewStudentActivity::class.java))
         }
-
+        btnAddStudent.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity,AddStudentActivity::class.java))
+        }
     }
 }
