@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.*
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.textfield.TextInputEditText
 import com.kiran.retrofitstarterbatch26.R
@@ -46,9 +47,10 @@ class AddStudentActivity : AppCompatActivity() {
         popMenu.menuInflater.inflate(R.menu.gallery_camera, popMenu.menu)
         popMenu.setOnMenuItemClickListener { item ->
             if (item.itemId == R.id.menuCamera) {
-               openCamera()
+                openCamera()
             } else if (item.itemId == R.id.menuGallery) {
-               openGallery()
+//                openGallery.launch("image/*")
+                openGallery()
             }
             true
         }
@@ -62,12 +64,17 @@ class AddStudentActivity : AppCompatActivity() {
     private fun openGallery() {
         val galleryOpenGaraHai = Intent(Intent.ACTION_PICK)
         galleryOpenGaraHai.type = "image/*"
-        startActivityForResult(galleryOpenGaraHai,GALLERY_CODE)
+        startActivityForResult(galleryOpenGaraHai, GALLERY_CODE)
     }
+
+//    private val openGallery = registerForActivityResult(ActivityResultContracts.GetContent(),
+//        ActivityResultCallback { imageUrl ->
+//            imgProfile.setImageURI(imageUrl)
+//        })
 
     private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent,CAMERA_CODE)
+        startActivityForResult(cameraIntent, CAMERA_CODE)
 
     }
 
